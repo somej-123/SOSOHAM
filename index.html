@@ -1,0 +1,1313 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <title>반응형 웹페이지</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="js/pageslide.js"></script>
+    <script src="js/section3.js"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js" integrity="sha512-G8JE1Xbr0egZE5gNGyUm1fF764iHVfRXshIoUWCTPAbKkkItp/6qal5YAHXrxEu4HNfPTQs6HOu3D5vCGS1j3w==" crossorigin="anonymous"></script>
+    <style>
+      .s_container{
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+      }
+
+      @media (min-width:1332px){
+      .active img{
+        transition:all ease-in-out 5s;
+        transform: scale(1.2);
+      }
+      #mainSlide img{
+            height: 47.5em;
+        }
+        .text{
+          position: absolute;
+          top: 40%;
+          left: 15%;
+          z-index: 1020;
+          color: white;
+          font-size: 10%;
+        }
+        .text h1{
+          text-shadow: 1px 1px 2px black;
+        }
+        .side_nav{
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 0;
+            width: 30px;
+            display: none;
+        }
+        .dot{
+            width: 30px;
+            padding: 0;
+            list-style: none;
+            position:relative;
+            left: 0;
+            top: 0;
+        }
+        .dot>li{
+            position: relative;
+            display: block;
+            padding: 10px;
+            z-index: 10000000;
+            margin:10px auto;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            border: 1px solid #000;
+            text-indent: -999999px;
+            padding: 0;
+            background-color: #000;
+            cursor: pointer;
+        }
+        .dot>li.on{
+          width: 20px;
+          height: 20px;
+          background-color: #fff;
+          border:1px solid #fff;
+        }
+        #se1{
+          background-color: #333333;
+          text-align: center;
+          height: 600px;
+          padding: 0 !important;
+          margin: 0;
+        }
+        #se1 h1{
+          padding: 5% 0;
+          color: #fff;
+        }
+        #se1_2{
+          width: 1280px;
+          margin: 0 auto;
+        }
+        .se1_ul li{
+          display: inline-block;
+          width: 240px;
+          height: 350px;
+          margin: 15px 30px;
+          text-align: left;
+          border-radius: 10px;
+          line-height: 2;
+          color: #fff;
+        }
+        .se1_ul hr{
+          background-color: #fff;
+        }
+        .se1_ul li:hover{
+          transition: ease-in-out 1s all;
+          transform: scale(1.05);
+        }
+        .se1_ul li h3{
+          padding: 15px 0 0;
+        }
+        svg{
+        float: right ;
+        }
+        span{
+          font-size: 30px;
+          font-size: bold;
+        }
+        #se2{
+          padding: 20px;
+          background-color: #333333;
+          text-align: center;
+          color: #fff;
+          height: 1000px;
+        }
+        #se2_2{
+          width: 1280px;
+          margin: 0 auto;
+        }
+        #se2 h2{
+          color: #fff;
+        }
+        #chartjs-0{
+          width: 100% !important;
+          height:100% !important;
+        }
+        .chart2{
+          display: none;
+        }
+        .se2_text{
+          text-align: left;
+          margin-top: 70px;
+        }
+        .se2_img{
+          position: relative;
+          overflow: hidden;
+          padding-bottom: 0 !important;
+        }
+        .se2_img a:hover .caption{
+          transform: translateY(-150px);
+        }
+        .se2_img img{
+          width: 580px;
+          height: 350px;
+          border-radius: 10px;
+        }
+        .caption{
+          position: absolute;
+          width: 580px;
+          height: 350px;
+          background-color: rgba(0, 0, 0, 0.5);
+          content: "";
+          top: 370px;
+          left: 14px;
+          margin:0 16px;
+          transition: all ease-in-out 1s;
+        }
+        .caption p{
+          padding-top: 30px;
+          color: #fff;
+          font-weight: bold;
+        }
+        .se2_img .modal{
+          color: black;
+        }
+        .se2_img .modal-body img{
+          width: 800px;
+          height: 500px;
+        }
+        #se2::after{
+          clear:both;
+          content: "";
+          display:block;
+        }
+        #se3{
+          padding: 20px;
+          background-color: #333333;
+          text-align: center;
+          color: #fff;
+          height: 800px;
+        }
+        #se3_2{
+          width: 1280px;
+          margin: 0 auto;
+        }
+        #se3_2 h2{
+          padding: 40px;
+        }
+        #se3_2>div{
+          width: 213px;
+          height: 600px;
+          overflow: hidden;
+          cursor: pointer;
+        }
+        #se3_2>div:hover img{
+          transform: scale(1.05);
+        }
+        #se3_2>div img{
+          width: 1000px;
+          height: 600px;
+          transition: all ease-in-out 1s;
+        }
+        #se3_3{
+          display: none;
+        }
+        #se3_4{
+          display: none;
+        }
+        #se4{
+          padding: 20px;
+          background-color: #333333;
+          text-align: center;
+          color: #fff;
+          height: 700px;
+        }
+        #se4_2{
+          width: 1280px;
+          margin: 0 auto;
+        }
+        #se4_2 h2{
+          padding: 40px;
+        }
+        #se4_2 h3{
+          padding: 20px;
+        }
+        .se4_3{
+          display: none;
+        }
+        .info{
+          margin-top: 30px;
+        }
+      }
+        @media screen and (max-width:1331px) and (min-width:769px){
+          .side_nav{
+                display: none;
+              }
+          body{
+            overflow-x: hidden;
+          }
+          .active img{
+            transition:all ease-in-out 5s;
+            transform: scale(1.2);
+            }
+          #mainSlide img{
+            height: 70vh;
+            }
+        .text{
+          position: absolute;
+          top: 40%;
+          left: 15%;
+          z-index: 1020;
+          color: white;
+          }
+        .text h1{
+          font-size: 25px;
+          text-shadow: 1px 1px 2px black;
+          }
+        #se1{
+          background-color: #333333;
+          text-align: center;
+          height: 700px;
+          padding: 0;
+          margin: 0;
+         }
+        #se1 h1{
+          padding: 5% 0;
+          color: #fff;
+        }
+        #se1_2{
+          width: 769px;
+          margin: 0 auto;
+        }
+        hr{
+          background-color: #fff;
+        }
+        .se1_ul li:hover{
+          transition: ease-in-out 1s all;
+          transform: scale(1.05);
+        }
+        .se1_ul li h3{
+          padding: 10px 0 0;
+        }
+        .se1_ul li{
+          display: inline-block;
+          width: 240px;
+          height: 220px;
+          margin: 15px 50px;
+          text-align: left;
+          border-radius: 10px;
+          line-height: 2;
+          color: #fff;
+          }
+          span{
+          font-size: 30px;
+          font-size: bold;
+          }
+          #se2{
+          padding: 20px;
+          background-color: #333333;
+          text-align: center;
+          color: #fff;
+          height: 850px;
+        }
+        #se2_2{
+          width: 769px;
+          margin: 0 auto;
+        }
+        #se2 h2{
+          color: #fff;
+        }
+        #chartjs-0{
+          width: 100% !important;
+          height:280px !important;
+        }
+        .chart2{
+          display: none;
+        }
+        svg{
+            float: right ;
+          }
+        .se2_text{
+          text-align: left;
+          margin-top: 40px;
+          font-size: 15px;
+          }
+          .se2_img{
+          margin-top: 20px;
+          position: relative;
+          overflow: hidden;
+          padding-bottom: 0 !important;
+          padding-left: 0 !important;
+        }
+        .se2_img a:hover .caption{
+          transform: translateY(-150px);
+        }
+        .se2_img img{
+          width: 300px;
+          height: 250px;
+          border-radius: 10px;
+        }
+        .caption{
+          position: absolute;
+          width: 300px;
+          height: 250px;
+          background-color: rgba(0, 0, 0, 0.5);
+          content: "";
+          top: 320px;
+          left: 18px;
+          margin:0 16px;
+          transition: all ease-in-out 1s;
+        }
+        .caption p{
+          padding-top: 30px;
+          font-size: 14px;
+          color: #fff;
+          font-weight: bold;
+          }
+          .se2_img .modal{
+            color: black;
+          }
+          .se2_img .modal-body img{
+            width: 450px;
+            height: 300px;
+          }
+          #se2::after{
+          clear:both;
+          content: "";
+          display:block;
+          }
+          #se3{
+            padding: 20px;
+            background-color: #333333;
+            text-align: center;
+            color: #fff;
+            height: 175vh;
+          }
+          #se3_2{
+          display: none;
+          }
+          #se3_4{
+            display: none;
+          }
+          #se3_3 h2{
+            padding: 40px;
+          }
+          #se3_3 h5{
+            color: #000;
+          }
+          #se3_3>div{
+            margin-bottom: 2vmax;
+            height: 45vh;
+            cursor: pointer;
+          }
+          #se3_3>div img{
+          width: 100%;
+          height: 45vh;
+          border-radius: 10px;
+        }
+        #se3_3 .modal-body img{
+          width: 100%;
+          height: 60vh;
+        }
+        #se4{
+          padding: 40px 20px 20px;
+          background-color: #333333;
+          text-align: center;
+          color: #fff;
+          height: 730px;
+        }
+        #se4_2{
+          display: none;;
+        }
+        .se4_3{
+          width: 769px;
+          margin: 0 auto;
+        }
+        #se4_3 h2{
+          padding: 40px;
+        }
+        .se4_3 h3{
+          padding: 20px;
+        }
+        
+
+      }
+      @media screen and (max-width:768px) and (min-width:320px){
+        body{
+            overflow-x: hidden;
+          }
+        .active img{
+            transition:all ease-in-out 5s;
+            transform: scale(1.2);
+          }
+          #mainSlide img{
+            height: 50vmax;
+          }
+          .text{
+            position: absolute;
+            top: 40%;
+            left: 15%;
+            z-index: 1020;
+            color: white;
+          }
+          .text h1{
+            font-size: 3vw;
+            text-shadow: 1px 1px 2px black;
+          }
+          #se1{
+          background-color: #333333;
+          text-align: center;
+          padding: 0;
+          margin: 0;
+         }
+          #se1 h1{
+            padding: 5% 0;
+            color: #fff;
+            font-size: 5vmax;
+          }
+          #se1_2{
+            min-width: 320px;
+            margin: 0 auto;
+          }
+          hr{
+            background-color: #fff;
+          }
+          .se1_ul{
+            padding: 0;
+            margin-bottom: 0;
+          }
+          .se1_ul li h3{
+            padding: 10px 0 0;
+            text-align: center;
+          }
+          .se1_ul li{
+            display: inline-block;
+            width: 240px;
+            margin: 3vh 50px;
+            text-align: left;
+            line-height: 2;
+            color: #fff;
+            }
+            span{
+            font-size: 30px;
+            font-size: bold;
+            }
+            #se2{
+              padding: 20px;
+              background-color: #333333;
+              text-align: center;
+              color: #fff;
+              height: 150vmax;
+              }
+              .caption{
+                display: none;
+              }
+            #se2_2{
+              min-width: 320px;
+              margin: 0 auto;
+            }
+            #se2 h2{
+            color: #fff;
+            }
+            .chart{
+              display: none;
+            }
+            svg{
+              float: right ;
+            }
+            .se2_text{
+              width: 100% !important;
+              float: none;
+              text-align: left;
+              margin-top: 40px;
+              font-size: 15px;
+              padding: 0 !important;
+              }
+            .se2_img{
+              width: 100% !important;
+              margin-top: 20px;
+              position: relative;
+              padding: 0 !important;
+            }
+            .se2_img a:hover .caption{
+              transform: translateY(-150px);
+            }
+            .se2_img img{
+              width: 100%;
+              height: 250px;
+              border-radius: 10px;
+            }
+            .caption{
+              position: absolute;
+              width: 300px;
+              height: 250px;
+              background-color: rgba(0, 0, 0, 0.5);
+              content: "";
+              top: 320px;
+              left: 18px;
+              margin:0 16px;
+              transition: all ease-in-out 1s;
+            }
+            .caption p{
+              padding-top: 30px;
+              font-size: 14px;
+              color: #fff;
+              font-weight: bold;
+              }
+              .se2_img .modal{
+                color: black;
+              }
+              .se2_img .modal-body img{
+                width: 100%;
+                height: 50vmax;
+              }
+              #se3{
+                padding: 20px;
+                background-color: #333333;
+                text-align: center;
+                color: #fff;
+              }
+              #se3_2{
+                display: none;
+              }
+              #se3_3{
+                display: none;
+              }
+              #se3_4>div{
+                margin-bottom: 2vmax;
+                height: 45vmax;
+                cursor: pointer;
+              }
+              #se3_4>div img{
+              width: 100%;
+              border-radius: 10px;
+              height: 45vmax;
+              }
+              #se3_4 .modal-body img{
+                width: 100%;
+                height: 60vmax;
+              }
+              #se3_4 h5{
+                color: #000;
+              }
+              #se4{
+                padding: 40px 20px 20px;
+                background-color: #333333;
+                text-align: center;
+                color: #fff;
+                }
+              #se4_2{
+                display: none;;
+                }
+              .se4_3{
+                width: 320px;
+                margin: 0 auto;
+                }
+              #se4_3 h2{
+                padding: 40px;
+                }
+              .se4_3 h3{
+                padding: 20px;
+                }
+              .phone2{
+                width: 100% !important;
+              }
+              .phone2 p{
+                font-size: 13px;
+              }
+              .side_nav{
+                display: none;
+              }
+      }
+      
+    </style>
+</head>
+  <body>
+    <!--네비게이션 시작-->
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">
+            <img src="img/logo.png" alt="로고">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a class="nav-link home" href="#">소소함</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link business" href="#se1">목표</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link objective" href="#se2">기업소개</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link design" href="#se3">디자인</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link contact" href="#se4">연락처</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <!--네비게이션 끝-->
+      <!-- 슬라이드 부분 -->
+      <div id="mainSlide" class="carousel slide carousel-fade" data-ride="carousel" style="position: relative;">
+        <div class="text">
+          <h1>안락하고 편안한 공간을 위한 곳</h1>
+          <h1>SOSOHAM이 당신을 초대합니다</h1>
+        </div>
+        <ol class="carousel-indicators">
+          <li data-target="#mainSlide" data-slide-to="0" class="active"></li>
+          <li data-target="#mainSlide" data-slide-to="1"></li>
+          <li data-target="#mainSlide" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="img/background1.jpg" class="d-block w-100" alt="슬라이드1">
+          </div>
+          <div class="carousel-item">
+            <img src="img/background2.jpg" class="d-block w-100" alt="슬라이드2">
+          </div>
+          <div class="carousel-item">
+            <img src="img/background3.jpg" class="d-block w-100" alt="슬라이드3">
+          </div>
+        </div>
+        <a class="carousel-control-prev" href="#mainSlide" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#mainSlide" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+      <!-- 슬라이드 끝 -->
+
+      <!-- 웹페이지 시작 -->
+      <div class="s_container container-fluid">
+            <!--section1 시작-->
+            <div id="se1" class="container-fluid aa w-100 se1">
+              <div id="se1_2">
+              <h1>SOSOHAM은</h1>
+              <ul class="se1_ul">
+                <li>
+                  <h3>행복</h3>
+                  <hr>
+                  <p><span>고</span>객님들이 편안하고 안락한 느낌을 받으며 행복할 수 있도록 고객님들만을 생각하며 좋은 제품을 소개해드리도록 하겠습니다.
+                  </p>
+                </li>
+                <li>
+                  <h3>도전</h3>
+                  <hr>
+                  <p><span>다</span>양한 디자인을 시도하며 개개인이 원하는 디자인이 나올 수 있도록 늘 새로운 소소함이 되도록 노력하겠습니다.　　　　
+                    </p>
+                </li>
+                <li>
+                  <h3>가치</h3>
+                  <hr>
+                  <p><span>단</span>순 이끌림으로 구매하여 금방 버려지는 것이 아닌 오랫동안 고객님들 옆에 남아 추억을 회상할 수 있는 제품을 만들겠습니다.
+                    </p>
+                </li>
+                <li>
+                  <h3>미래</h3>
+                  <hr>
+                  <p><span>늘</span> 변한없는 마음과 진취적인 마음으로 여러분들 곁에 오랫동안 기억되고 사랑받는 기업이 되도록 하겠습니다.
+                    </p>
+                </li>
+              </ul>
+              </div>
+            </div>
+            <!--section1 끝-->
+            <!--section2 시작-->
+            <div id="se2" class="aa w-100 container-fluid">
+              <div id="se2_2">
+                <h2 class="my-3">SOSOHAM은 성장하고 있습니다</h2>
+                <div class="w-50 mx-auto mh-25 p-3 my-5 chart">
+                  <canvas id="chartjs-0" class="chartjs" ></canvas>
+                </div>
+                <div class="chart2">
+                  <img src="img/chart.png" width="100%" height="100%">
+                </div>
+                <div class="w-50 p-3 se2_text float-left">
+                  <p><span>SOSOHAM</span>은 2017년도 부터 설립되어 지금까지 꾸준하게 매출이 늘어가고 있는 기업입니다.</p>
+                  <p>기업이 잘되는 것이 단순 물건을 잘팔아서가 아니라, 고객님들과의 변치 않은 꾸준한 소통,
+                    새로운 것에 도전하는 정신이 있어 기업이 성장해 나가고 있습니다.</p>
+                  <p>지금의 만족에 멈추지 않고 국내뿐이 아닌 글로벌 기업으로 성장해
+                    나가겠습니다.
+                  </p>
+                </div>
+                
+                <div class="w-50 p-3 float-right se2_img">
+                  <!-- Button trigger modal -->
+                  <a href="#" data-toggle="modal" data-target="#exampleModal"></button>
+                    <img src="img/img1.jpg">
+                    <div class="caption">
+                      <p>자세히 보기</p>
+                    </div>
+                  </a>
+
+                  <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">SOSOHAM</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <img src="img/img1.jpg">
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  <!-- Modal end-->
+
+                </div>
+                <!-- Button trigger modal end-->
+               
+              </div>
+            </div>
+            <!--section2 끝-->
+            <!--section3 시작-->
+            <div id="se3" class="aa w-100 pb-5">
+              <!--section3 pc 시작-->
+              <div id="se3_2">
+                <h2>SOSOHAM Design</h2>
+                <div class="design_1 float-left">
+                  <img src="img/red.jpg">
+                </div>
+                <div class="design_2 float-left">
+                  <img src="img/se3_2.jpg">
+                </div>
+                <div class="design_3 float-left">
+                  <img src="img/yellow.jpg">
+                </div>
+                <div class="design_4 float-left">
+                  <img src="img/green.jpg">
+                </div>
+                <div class="design_5 float-left">
+                  <img src="img/blue.jpg">
+                </div>
+                <div class="design_6 float-left">
+                  <img src="img/purple.jpg">
+                </div>
+              </div>
+              <!--section3 pc 끝-->
+              <!--section3 태블릿 시작-->
+              <div id="se3_3">
+                <h2>SOSOHAM Design</h2>
+                <div class="row">
+                <div class="w-50 p-2 col">
+                  <a href="#" data-toggle="modal" data-target="#red"></button>
+                    <img src="img/red.jpg">
+                  </a>
+
+                  <!-- Modal -->
+                    <div class="modal fade" id="red" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">SOSOHAM</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <img src="img/red.jpg">
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                <div class="w-50 p-2 col">
+                  <a href="#" data-toggle="modal" data-target="#orange"></button>
+                    <img src="img/orange.jpg">
+                  </a>
+
+                  <!-- Modal -->
+                    <div class="modal fade" id="orange" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">SOSOHAM</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <img src="img/orange.jpg">
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="w-50 p-2 col">
+                  <a href="#" data-toggle="modal" data-target="#yellow"></button>
+                    <img src="img/yellow.jpg">
+                  </a>
+
+                  <!-- Modal -->
+                    <div class="modal fade" id="yellow" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">SOSOHAM</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <img src="img/yellow.jpg">
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                <div class="w-50 p-2 col">
+                  <a href="#" data-toggle="modal" data-target="#green"></button>
+                    <img src="img/green.jpg">
+                  </a>
+
+                  <!-- Modal -->
+                    <div class="modal fade" id="green" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">SOSOHAM</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <img src="img/green.jpg">
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="w-50 p-2 col">
+                  <a href="#" data-toggle="modal" data-target="#blue"></button>
+                    <img src="img/blue.jpg">
+                  </a>
+
+                  <!-- Modal -->
+                    <div class="modal fade" id="blue" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">SOSOHAM</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <img src="img/blue.jpg">
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                <div class="w-50 p-2 col">
+                  <a href="#" data-toggle="modal" data-target="#purple"></button>
+                    <img src="img/purple.jpg">
+                  </a>
+
+                  <!-- Modal -->
+                    <div class="modal fade" id="purple" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">SOSOHAM</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <img src="img/purple.jpg">
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+              </div>
+              </div>
+              <!--section3 태블릿 끝-->
+
+              <!-- section3 핸드폰 시작-->
+              <div id="se3_4">
+                <h2>SOSOHAM Design</h2>
+                <div class="w-100 p-2">
+                  <a href="#" data-toggle="modal" data-target="#red2"></button>
+                    <img src="img/red.jpg">
+                  </a>
+
+                  <!-- Modal -->
+                    <div class="modal fade" id="red2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">SOSOHAM</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <img src="img/red.jpg">
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                <div class="w-100 p-2">
+                  <a href="#" data-toggle="modal" data-target="#orange2"></button>
+                    <img src="img/orange.jpg">
+                  </a>
+
+                  <!-- Modal -->
+                    <div class="modal fade" id="orange2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">SOSOHAM</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <img src="img/orange.jpg">
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                <div class="w-100 p-2">
+                  <a href="#" data-toggle="modal" data-target="#yellow2"></button>
+                    <img src="img/yellow.jpg">
+                  </a>
+
+                  <!-- Modal -->
+                    <div class="modal fade" id="yellow2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">SOSOHAM</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <img src="img/yellow.jpg">
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                <div class="w-100 p-2">
+                  <a href="#" data-toggle="modal" data-target="#green2"></button>
+                    <img src="img/green.jpg">
+                  </a>
+
+                  <!-- Modal -->
+                    <div class="modal fade" id="green2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">SOSOHAM</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <img src="img/green.jpg">
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                <div class="w-100 p-2">
+                  <a href="#" data-toggle="modal" data-target="#blue2"></button>
+                    <img src="img/blue.jpg">
+                  </a>
+
+                  <!-- Modal -->
+                    <div class="modal fade" id="blue2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">SOSOHAM</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <img src="img/blue.jpg">
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                <div class="w-100 p-2">
+                  <a href="#" data-toggle="modal" data-target="#purple2"></button>
+                    <img src="img/purple.jpg">
+                  </a>
+
+                  <!-- Modal -->
+                    <div class="modal fade" id="purple2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">SOSOHAM</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <img src="img/purple.jpg">
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+              </div>
+              <!-- section3 핸드폰 시작-->
+            </div>
+            <!--section3 끝-->
+
+            <!--section4-->
+            <div id="se4" class="aa w-100">
+            <!--section4 pc시작-->
+            <div id="se4_2">
+              <h2>Contact</h2>
+                <div class="row">
+                <div class="col">
+                <form class="ml-5 mt-5">
+                  <div class="row">
+                    <div class="col mb-3">
+                      <input type="text" class="form-control" placeholder="이름">
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col mb-3">
+                      <input type="text" class="form-control" placeholder="회사">
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col mb-3">
+                      <input type="email" class="form-control" placeholder="이메일">
+                    </div>
+                    <div class="col mb-3">
+                      <input type="tel" class="form-control" placeholder="전화번호">
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col mb-3">
+                      <textarea placeholder="내용" class="form-control"></textarea>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <button type="submit" class="btn btn-outline-light btn-lg btn-block">등록</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="col info">
+                <h3>Company Info</h3>
+                <p>경기 성남시 분당구 판교역로</p>
+                <p>SOSOHAM@naver.com</p>
+                <p>031-123-4567 | AM 08:00 - PM 06:00</p>
+                <p>Copyright © SOSOHAM Corp. All rights reserved.</p>
+              </div>
+            </div>
+          </div>
+          <!--section4 pc끝-->
+          <!--section4 테블릿-->
+          <div class="se4_3">
+            <h2>Contact</h2>
+            <div class="row w-75 mx-auto phone2">
+              <div class="col">
+              <form class="mt-5">
+                <div class="row">
+                  <div class="col mb-3">
+                    <input type="text" class="form-control" placeholder="이름">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col mb-3">
+                    <input type="text" class="form-control" placeholder="회사">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col mb-3">
+                    <input type="email" class="form-control" placeholder="이메일">
+                  </div>
+                  <div class="col mb-3">
+                    <input type="tel" class="form-control" placeholder="전화번호">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col mb-3">
+                    <textarea placeholder="내용" class="form-control"></textarea>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <button type="submit" class="btn btn-outline-light btn-lg btn-block">등록</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+            </div>
+            <div class="row w-75 mx-auto mt-5 phone2">
+              <div class="col">
+                <h3>Company Info</h3>
+                <p>경기 성남시 분당구 판교역로</p>
+                <p>SOSOHAM@naver.com</p>
+                <p>031-123-4567 | AM 08:00 - PM 06:00</p>
+                <p>Copyright © SOSOHAM Corp. All rights reserved.</p>
+              </div>
+            </div>
+          </div>
+              <!--section4 테블릿 끝-->
+        </div>
+        <!--section4 끝-->
+      </div>
+    </div>
+        <div class="side_nav">
+           <ul class="dot">
+               <li class="dot1 on">닷1</li>
+               <li class="dot2">닷2</li>
+               <li class="dot3">닷3</li>
+               <li class="dot4">닷4</li>
+           </ul>
+        </div>
+    
+    <script>
+        $(document).ready(function(){
+            $('#mainSlide').carousel({
+            interval: 5000//m/s 3000=3초
+              });
+            });
+    </script>
+    <script>
+     new Chart(document.getElementById("chartjs-0"),
+     {"type":"line",
+     "data":{
+      "gridLines":[{
+        "display":true,
+        "color":"#fff"
+      }],
+       "labels":[
+         "2017년",
+         "2018년",
+         "2019년"],
+         "datasets":[{
+           "label":"영업 순이익",
+           "data":[
+             0,
+             5,
+             12],
+             "fill":false,
+             "borderWidth":1,
+             "backgroundColor":'rgb(75, 192, 192)',
+             "borderColor":"rgb(75, 192, 192)",
+             "lineTension":0.1}]
+      },
+             "options":{
+              'legend':{
+                'labels': {
+                // This more specific font property overrides the global property
+                'fontColor': '#fff',
+                'fontSize':15
+                },
+              },
+              scales: {
+                yAxes: [{
+                  ticks: {
+                    fontColor : "#fff",
+                    fontSize : 14,
+                  },
+                  gridLines:{
+                    color: '#fff',
+                    lineWidth:1
+					        },
+                  scaleLabel: {
+                    display: true,
+                    labelString: '억(단위)',
+                    fontColor:"#fff"
+                }
+                }],
+                xAxes: [{
+                  ticks:{
+                    fontColor : '#fff',
+                    fontSize : 14
+                  },
+                  gridLines:{
+                    color: "#fff",
+                    lineWidth: 1
+					        },
+                  display: true,
+                  scaleLabel: {
+                    display: true,
+                    labelString: '년도(단위)',
+                    fontColor:"#fff"
+                  }
+				        }]
+			        }
+        }
+      });
+      
+      </script>
+  </body>
+</html>
